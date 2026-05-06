@@ -1,27 +1,27 @@
-name:CI-Pipeline
+name: CI-Pipeline
 
 on:
   push:
-     branches:["main"]
+    branches: ["main"]
 
 jobs:
-   build:
-      runs-on:ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-      steps:
-        -name:Checkout code
-         uses:actions/Checkout@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-        -name:setup Node
-          uses:actions/setup-node@v3
-          with:
-             node-version:18
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-        -name:Install dependenecies
-          run:npm install 
+      - name: Install dependencies
+        run: npm install
 
-        -name: Run app
-          run:node src/Server.js 
+      - name: Run app
+        run: node src/Server.js
 
-        -name:Build docker image
-         run:Docker build -t myapp .
+      - name: Build docker image
+        run: docker build -t myapp .
